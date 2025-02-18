@@ -5,6 +5,8 @@ import CurrentValue from "./CurrentValue";
 
 const Heading = () => {
   const [currentValue, setCurrentValue] = useState(0);
+  const [inputValue, setInputValue] = useState(0);
+
   const handleIncrement = () => {
     setCurrentValue((prev) => prev + 1);
   };
@@ -13,7 +15,17 @@ const Heading = () => {
   };
   const handleReset = () => {
     setCurrentValue(0);
+    setInputValue(0);
   };
+
+  const handleIncrementByValue = ()=>{
+    setCurrentValue((prev)=>prev+Number(inputValue));
+  }
+
+  const handleDecrementByValue = ()=>{
+    setCurrentValue((prev)=>prev-Number(inputValue));
+
+  }
   return (
     <div className="flex flex-col w-[90%] mx-auto h-[90%] items-center">
       <h1 className="text-4xl text-center mt-10 font-bold uppercase ">
@@ -26,7 +38,11 @@ const Heading = () => {
           <Button value="decrementor" handleClick={handleDecrement} />
           <Button value="reset" handleClick={handleReset} />
         </div>
-        <InputValue />
+        <InputValue inputValue = {inputValue} setInputValue = {setInputValue}/>
+        <div className="flex mt-4 w-[30%] justify-center gap-4">
+        <Button value="increment by value" handleClick={handleIncrementByValue} />
+        <Button value="decrement by value" handleClick={handleDecrementByValue} />
+        </div>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ const InputValue = ({ inputValue, setInputValue }) => {
           name="input_number"
           value={inputValue === 0 ? "" : inputValue}
           onChange={handleOnChange}
-          className=" bg-gray-100 rounded-full w-[40%] mt-10 p-2 appearance-none outline-none"
+          className=" bg-gray-100 rounded-full w-[50%] md:w-[40%] lg:w-[30%] mt-10 p-2 appearance-none outline-none"
           onFocus={handleOnBlur} // Restore 0 when input is empty
           style={{
             WebkitAppearance: "none",

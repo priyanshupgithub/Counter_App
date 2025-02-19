@@ -33,13 +33,13 @@ const Heading = () => {
       </h1>
       <div className="border bg-gray-200 mt-10 h-full flex flex-col w-full items-center">
         <CurrentValue value={currentValue} />
-        <div className="flex mt-4 w-[30%] justify-center gap-4">
+        <div className="flex mt-4 w-[60%] justify-center gap-1 flex-wrap md:flex-nowrap lg:flex-nowrap ">
           <Button value="incrementor" handleClick={handleIncrement} />
           <Button value="decrementor" handleClick={handleDecrement} />
           <Button value="reset" handleClick={handleReset} />
         </div>
         <InputValue inputValue = {inputValue} setInputValue = {setInputValue}/>
-        <div className="flex mt-4 w-[30%] justify-center gap-4">
+        <div className="flex mt-4 w-[30%] justify-center gap-1">
         <Button value="increment by value" handleClick={handleIncrementByValue} />
         <Button value="decrement by value" handleClick={handleDecrementByValue} />
         </div>

@@ -1,14 +1,15 @@
 import Heading from "./components/Heading";
-import { ThemeSwitcherContextProvider } from "./context/ThemeSwitcherContext";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
     <>
-      <ThemeSwitcherContextProvider>
+      <Provider store={store}>
         <div className="h-screen">
           <Heading />
         </div>
-      </ThemeSwitcherContextProvider>
+      </Provider>
     </>
   );
 }

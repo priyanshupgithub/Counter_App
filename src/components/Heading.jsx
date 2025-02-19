@@ -1,34 +1,32 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import InputValue from "./InputValue";
 import CurrentValue from "./CurrentValue";
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
-import { ThemeSwitcherContext } from "../context/ThemeSwitcherContext";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  increment,
+  decrement,
+  reset,
+  incrementByValue,
+  decrementByValue,
+} from "../utils/counterSlice";
+import { toggleTheme } from "../utils/themeSlice";
 
 const Heading = () => {
-  const [currentValue, setCurrentValue] = useState(0);
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
+  const currentValue = useSelector((state) => state.counter.value);
+
+  // Store input value in Heading so it can be used in the buttons
   const [inputValue, setInputValue] = useState(0);
 
-  const { theme, setTheme, handleSetTheme } = useContext(ThemeSwitcherContext);
-  const handleIncrement = () => {
-    setCurrentValue((prev) => prev + 1);
-  };
-  const handleDecrement = () => {
-    setCurrentValue((prev) => prev - 1);
-  };
-  const handleReset = () => {
-    setCurrentValue(0);
-    setInputValue(0);
+  const handleClick = () => {
+    dispatch(reset()); // Reset the current/counter value
+    setInputValue(0); // Reset the input field value
   };
 
-  const handleIncrementByValue = () => {
-    setCurrentValue((prev) => prev + Number(inputValue));
-  };
-
-  const handleDecrementByValue = () => {
-    setCurrentValue((prev) => prev - Number(inputValue));
-  };
   return (
     <div
       className={`flex flex-col w-full mx-auto h-full items-center 
@@ -39,7 +37,7 @@ const Heading = () => {
       </h1>
       <span
         className="absolute text-4xl top-[5%] right-[5%] cursor-pointer"
-        onClick={handleSetTheme}
+        onClick={() => dispatch(toggleTheme())}
       >
         {theme === "Light" ? <MdDarkMode /> : <CiLight />}
       </span>
@@ -50,19 +48,25 @@ const Heading = () => {
       >
         <CurrentValue value={currentValue} />
         <div className="flex mt-4 w-full justify-center gap-1 flex-wrap md:flex-nowrap lg:flex-nowrap ">
-          <Button value="incrementor" handleClick={handleIncrement} />
-          <Button value="decrementor" handleClick={handleDecrement} />
-          <Button value="reset" handleClick={handleReset} />
+          <Button
+            value="incrementor"
+            handleClick={() => dispatch(increment())}
+          />
+          <Button
+            value="decrementor"
+            handleClick={() => dispatch(decrement())}
+          />
+          <Button value="reset" handleClick={handleClick} />
         </div>
         <InputValue inputValue={inputValue} setInputValue={setInputValue} />
         <div className="flex mt-4 w-[30%] justify-center gap-1">
           <Button
             value="increment by value"
-            handleClick={handleIncrementByValue}
+            handleClick={() => dispatch(incrementByValue(Number(inputValue)))}
           />
           <Button
             value="decrement by value"
-            handleClick={handleDecrementByValue}
+            handleClick={() => dispatch(decrementByValue(Number(inputValue)))}
           />
         </div>
       </div>

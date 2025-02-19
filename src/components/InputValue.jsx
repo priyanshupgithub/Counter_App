@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const InputValue = ({ inputValue, setInputValue }) => {
   const handleOnChange = (e) => {
@@ -6,11 +6,11 @@ const InputValue = ({ inputValue, setInputValue }) => {
     setInputValue(value === "" ? 0 : Number(value)); // Allow empty value, but store as a number
   };
 
-  const handleOnBlur = () => {
-    if (inputValue === "" || isNaN(inputValue)) {
-      setInputValue(0);
-    } // Restore 0 if input is empty
-  };
+  // const handleOnBlur = () => {
+  //   if (inputValue === "" || isNaN(inputValue)) {
+  //     setInputValue(0);
+  //   } // Restore 0 if input is empty
+  // };
 
   return (
     <>
@@ -22,7 +22,7 @@ const InputValue = ({ inputValue, setInputValue }) => {
           value={inputValue === 0 ? "" : inputValue}
           onChange={handleOnChange}
           className=" bg-gray-100 text-black rounded-full w-[50%] md:w-[40%] lg:w-[30%] mt-10 p-2 appearance-none outline-none"
-          onFocus={handleOnBlur} // Restore 0 when input is empty
+          // onFocus={handleOnBlur} // Restore 0 when input is empty
           style={{
             WebkitAppearance: "none",
             MozAppearance: "textfield", // Ensures compatibility with Firefox
